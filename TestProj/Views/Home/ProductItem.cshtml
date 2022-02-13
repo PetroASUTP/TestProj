@@ -1,0 +1,55 @@
+﻿<style>
+    table {
+        width: 80%; /* Ширина таблицы */
+    }
+
+    td {
+        padding: 2px; /* Поля в ячейках */
+        vertical-align: top; /* Выравнивание по верхнему краю ячеек */
+        width: 25%;
+    }
+
+
+    .form {
+        border: 1px solid gray;
+        padding-bottom: 2%;
+    }
+</style>
+
+<p>  <a href='@Url.Content("~/Home/Index")'><<</a>  </p>
+<div class="form">
+    <form action='@Url.Content("~/Home/SaveMoveProduct")' method="post">
+        <input type="hidden" id="Id" name="Id" value=@ViewBag.Id />
+        <strong>@ViewBag.Name</strong> переместить из <strong>@ViewBag.NoName</strong> в @Html.DropDownList("IdN", ViewBag.List as SelectList)  <input type="submit" value="Сохранить" />
+
+    </form>
+</div>
+
+
+            @{
+                <p>  История перемещений: </p>
+                if (ViewBag.ProductHistory != null)
+                {
+                    foreach (var h in ViewBag.ProductHistory)
+                    {
+
+                        <p> <span style="color:darkcyan"> @h.date   </span>  from <strong>@h.getfrom</strong>  to <strong>@h.getto</strong>  </p>
+
+                    }
+                }
+                else
+                {
+                    <p> No data. </p>
+                }
+
+
+
+            }
+       
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+﻿<div id="product" name="product">
+    @{
+
+
+        <strong>  @ViewBag.Nomenclature </strong>
+        if (ViewBag.Product != null)
+        {
+
+
+            foreach (var n in ViewBag.Product)
+            {
+
+                <p>   @n.Name;     <a href='@Url.Content("~/Home/ProductItem?Id="+@n.Id)'>Открыть</a>  </p>
+
+
+            }
+
+
+        }
+
+    }
+</div>

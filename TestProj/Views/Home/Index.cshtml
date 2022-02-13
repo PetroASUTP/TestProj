@@ -1,0 +1,66 @@
+﻿<style>
+    table {
+        width: 80%; /* Ширина таблицы */
+    }
+
+    td {
+        padding: 2px; /* Поля в ячейках */
+        vertical-align: top; /* Выравнивание по верхнему краю ячеек */
+        width:25%;
+    }
+
+</style>
+<table>
+    <tr>
+        <td>
+            @{
+
+                if (ViewBag.Warehouse != null)
+                {
+
+
+                    foreach (var v in ViewBag.Warehouse)
+                    {
+
+                        <p>   @v.Name    <button onclick='getnom(@v.Id)'> Открыть  </button>  </p>
+
+
+                    }
+
+
+                }
+
+            }
+        </td>
+        <td>
+            <div id="nomenclature" name="nomenclature"></div>
+        </td>
+
+        <td>
+            <div id="product" name="product"></div>
+        </td>
+    </tr>
+</table>
+<script>
+
+
+    function getnom(id)
+    {
+        $('#product').empty();
+        $.ajax
+            ({
+                type: "GET",
+                url:  "@Url.Content("~/Home/Nomenclature")",
+                data:
+                {
+                    Id: id,
+
+                },
+                success: function (msg) { $('#nomenclature').replaceWith(msg); }
+
+            });
+
+    }
+
+
+</script>

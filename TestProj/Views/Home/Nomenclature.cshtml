@@ -1,0 +1,48 @@
+﻿<div id="nomenclature" name="nomenclature">
+    @{
+
+
+        <h3>  @ViewBag.Warehouse </h3>
+        if (ViewBag.Nomenclature != null)
+        {
+
+
+            foreach (var n in ViewBag.Nomenclature)
+            {
+
+               <p>  <button onclick='getprod(@n.Id)'>Товары</button>  <a href='@Url.Content("~/Home/NomenclatureItem?Id="+@n.Id)'>Открыть</a>  @n.Name;    </p>
+
+
+            }
+
+
+        }
+
+    }
+
+</div>
+
+<script>
+
+
+    function getprod(id)
+    {
+
+        $.ajax
+            ({
+                type: "GET",
+                url:  "@Url.Content("~/Home/Product")",
+                data:
+                {
+                    Id: id,
+
+                },
+                success: function (msg) { $('#product').replaceWith(msg); }
+
+            });
+
+    }
+
+
+
+</script>

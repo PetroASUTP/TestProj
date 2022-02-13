@@ -1,0 +1,92 @@
+﻿<style>
+    table {
+        width: 80%; /* Ширина таблицы */
+    }
+
+    td {
+        padding: 2px; /* Поля в ячейках */
+        vertical-align: top; /* Выравнивание по верхнему краю ячеек */
+        width: 25%;
+    }
+
+
+    .form{
+        border:1px solid gray;
+        padding-bottom:2%;
+    }
+
+</style>
+
+<p>  <a href='@Url.Content("~/Home/Index")'><<</a>  </p>
+<div class="form">
+    <form action='@Url.Content("~/Home/SaveMove")' method="post">
+        <input type="hidden" id="IdN" name="IdN" value=@ViewBag.Nomenclature.Id />
+        <strong>@ViewBag.Nomenclature.Name</strong> переместить из @ViewBag.Warehouse в @Html.DropDownList("IdWar", ViewBag.List as SelectList)  <input type="submit" value="Сохранить" />
+
+    </form>
+</div>
+
+
+<table><tr>
+    <td>
+        @{
+            <p>  История перемещений: </p>
+            if (ViewBag.MoveHistory != null)
+            {
+                foreach (var h in ViewBag.MoveHistory)
+                {
+
+                    <p> <span style="color:darkcyan"> @h.date   </span>  from <strong>@h.getfrom</strong>  to <strong>@h.getto</strong>  </p>
+
+                }
+            }
+            else
+            {
+                <p> No data. </p>
+            }
+
+
+
+        }
+    </td>
+
+
+
+
+
+
+
+
+
+
+
+    <td>
+        @{
+
+            if (ViewBag.Product != null)
+            {
+                <p>  Количество единиц товара: @ViewBag.Count</p>
+
+
+                foreach (var h in ViewBag.Product)
+                {
+
+                    <p> @h.Name   <a href='@Url.Content("~/Home/ProductItem?Id="+@h.Id)'>Переместить</a>   </p>
+
+                }
+            }
+            else
+            {
+                <p> No data. </p>
+            }
+
+
+
+        }
+    </td>
+
+
+
+</tr>
+
+</table>
